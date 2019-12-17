@@ -152,9 +152,14 @@ body {
     align-self: center;
 }
 
-.portfolio a img {
+.portfolio a {
+    text-decoration: none;
+}
+
+.portfolio a span {
     align-self: center;
     border: 2px solid #fff;
+    
     background: #fff;
     padding: 5px;
 }
