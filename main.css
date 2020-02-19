@@ -129,7 +129,7 @@ body {
 .skills ul {
     display: flex;
     flex-wrap: wrap;
-    align-self: center;
+    /* align-self: center; */
 }
 
 .skills ul li {
