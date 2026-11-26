@@ -1,75 +1,841 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Aleem Akinyoola</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <script src="main.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleem Akinyoola Portfolio</title>
+<meta name="description" content="Aleem Akinyoola, product designer. Six years designing complex B2B products and design systems for commodity exchanges, finance and data teams.">
+<meta property="og:title" content="Aleem Akinyoola, Product Designer">
+<meta property="og:description" content="Product designer and design team lead at AFEX. Fintech, trading platforms, data tools and design systems.">
+<meta name="theme-color" content="#FB5707">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='3' y='3' width='10' height='10' fill='%23FB5707'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Doto:wght@500;700;900&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: Warm Fusion pushed toward an engineering-paper look. One fixed sheet on a grainy
+   orange ground, ruled into numbered rows with gutters; dot-matrix graphics carry the depth;
+   the bar sits on the sheet's bottom edge; only the content inside changes. */
+:root {
+  --paper: #F4F3EF;
+  --paper-hi: #FFFFFF;
+  --paper-2: #ECEAE4;
+  --line: #DDDAD2;
+  --ink: #141414;
+  --ink-2: #57544E;
+  --faint: #8E8A82;
+  --terra: #FB5707;          /* Warm Fusion orange-9 */
+  --terra-text: #D94600;
+  --terra-tint: #FCE4D6;
+  --night: #121212;
+  --night-2: #1B1B1B;
+  --night-line: #2C2C2C;
+  --night-ink: #F2F0EA;
+  --night-ink-2: #9C9890;
+  --hard: #141414;
+  --scrim: rgba(20, 8, 0, .5);
+  --g1: #FF5A0A; --g2: #FF8A3D; --g3: #FFC3A0;
+  --f-head: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+  --f-dot: "Doto", "Geist Mono", ui-monospace, monospace;
+  --gut: 76px;
+  --track: -.03em;
+  --ease: cubic-bezier(.2, .7, .3, 1);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151515; --paper-hi: #1C1C1C; --paper-2: #1F1F1F; --line: #2A2A2A;
+    --ink: #F2F0EA; --ink-2: #A7A39B; --faint: #75716A; --terra-text: #FF7A33; --terra-tint: #3A1A08;
+    --night: #0B0B0B; --night-2: #141414; --night-line: #262626;
+    --hard: #000; --scrim: rgba(0, 0, 0, .62);
+    --g1: #6A1E00; --g2: #3A1204; --g3: #1A0A04;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151515; --paper-hi: #1C1C1C; --paper-2: #1F1F1F; --line: #2A2A2A;
+  --ink: #F2F0EA; --ink-2: #A7A39B; --faint: #75716A; --terra-text: #FF7A33; --terra-tint: #3A1A08;
+  --night: #0B0B0B; --night-2: #141414; --night-line: #262626;
+  --hard: #000; --scrim: rgba(0, 0, 0, .62);
+  --g1: #6A1E00; --g2: #3A1204; --g3: #1A0A04;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; overflow: hidden; background: var(--g2); color: var(--ink); font: 400 15px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--terra); outline-offset: 2px; }
+.mono { font: 400 11px/1.6 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; }
+.faint { color: var(--faint); }
+.dotted { font-family: var(--f-dot); font-weight: 700; letter-spacing: -.01em; }
+
+/* grainy orange ground */
+.ground { position: fixed; inset: 0; background:
+  radial-gradient(90% 70% at 50% 110%, var(--g1) 0%, transparent 70%),
+  radial-gradient(70% 60% at 0% 0%, var(--g3) 0%, transparent 70%),
+  radial-gradient(70% 60% at 100% 10%, var(--g3) 0%, transparent 70%),
+  var(--g2); }
+.ground::after { content: ""; position: absolute; inset: 0; opacity: .32; mix-blend-mode: multiply; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- fixed frame and sheet ---------- */
+.frame { position: fixed; top: 36px; bottom: 54px; left: 50%; width: min(900px, calc(100vw - 40px)); transform: translateX(-50%); }
+.sheet { position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--paper); border: 1.5px solid var(--hard); border-radius: 6px; box-shadow: 6px 6px 0 var(--hard); }
+.stage { position: relative; flex: 1; min-height: 0; }
+.view { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.view[hidden] { display: none; }
+.view:focus, .view:focus-visible { outline: none; }
+.view::-webkit-scrollbar { width: 6px; }
+.view::-webkit-scrollbar-thumb { background: var(--line); }
+
+/* ruled rows: number gutter | content | gutter */
+.row { display: grid; grid-template-columns: var(--gut) minmax(0, 1fr) var(--gut); border-bottom: 1px solid var(--line); flex: none; }
+.row > .n { border-right: 1px solid var(--line); padding: 14px 0 0 16px; font: 400 10.5px/1.6 var(--f-mono); letter-spacing: .1em; color: var(--faint); }
+.row > .r { border-left: 1px solid var(--line); }
+.row > .c { min-width: 0; padding: 30px 36px; }
+.row.fill { flex: 1 0 96px; border-bottom: 0; }
+.row.tight > .c { padding-top: 14px; padding-bottom: 14px; }
+.row.band > .c { background: var(--paper-hi); text-align: center; }
+
+.head { display: grid; grid-template-columns: var(--gut) minmax(0, 1fr) var(--gut); border-bottom: 1px solid var(--line); flex: none; }
+.head > .n { border-right: 1px solid var(--line); display: grid; place-items: center; }
+.head > .r { border-left: 1px solid var(--line); }
+.head > .c { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 36px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 500 16px/1 var(--f-head); letter-spacing: -.01em; }
+.px-mark { width: 14px; height: 14px; display: block; }
+
+.head-r { display: flex; align-items: center; gap: 18px; }
+.theme { display: inline-flex; border: 1px solid var(--line); padding: 2px; background: var(--paper-hi); }
+.theme button { height: 24px; padding: 0 9px; background: none; border: 0; cursor: pointer; font: 400 10px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); transition: background 200ms, color 200ms; }
+.theme button:hover { color: var(--ink); }
+.theme button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+html.theming, html.theming * { transition: background-color 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease), box-shadow 320ms var(--ease) !important; }
+/* ---------- home ---------- */
+.hero h1 { font: 500 clamp(38px, 5.8vw, 62px)/1.02 var(--f-head); letter-spacing: var(--track); text-wrap: balance; }
+.hero h1 .dotted { color: var(--terra); font-weight: 800; letter-spacing: -.05em; white-space: nowrap; font-size: .9em; }
+.hero h1 .ast { display: inline-block; width: .5em; height: .5em; margin-right: .12em; vertical-align: .1em; }
+.hero-low { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 36px; padding-top: 28px; border-top: 1px dashed var(--line); }
+.hero-low p { color: var(--ink-2); font-size: 17px; line-height: 1.65; max-width: 30em; }
+.actions { display: grid; gap: 14px; justify-items: start; }
+.live { display: inline-block; width: 7px; height: 7px; background: #30A46C; margin-right: 10px; vertical-align: 1px; animation: live 2.4s ease-in-out infinite; }
+@keyframes live { 50% { opacity: .35; } }
+.actions-top { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; background: var(--ink); color: var(--paper); border: 0; text-decoration: none; cursor: pointer; font: 500 14px/1 var(--f-body); white-space: nowrap; transition: transform 120ms var(--ease), box-shadow 120ms var(--ease); box-shadow: 0 0 0 var(--terra); }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--terra); }
+.btn:active { transform: translate(1px, 1px); box-shadow: 0 0 0 var(--terra); }
+.btn svg { width: 14px; height: 14px; }
+.link { text-decoration: none; font: 500 14px/1 var(--f-body); padding-bottom: 4px; border-bottom: 1px dashed var(--faint); white-space: nowrap; transition: color 200ms, border-color 200ms; }
+.link:hover { color: var(--terra-text); border-color: var(--terra); }
+.copy { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--faint); font: 400 11.5px/1.6 var(--f-mono); }
+.copy:hover { color: var(--ink); }
+.copy svg { width: 12px; height: 12px; }
+
+.field { position: relative; height: 270px; padding: 0 !important; overflow: hidden; }
+.field canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.field-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); pointer-events: none; }
+.field-grid > i { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; }
+.field-grid > i:nth-child(6n) { border-right: 0; }
+.step { position: absolute; display: flex; align-items: center; gap: 8px; font: 400 10.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); white-space: nowrap; padding: 6px 8px; pointer-events: none; }
+.step b { font-weight: 400; color: var(--terra-text); }
+.step .sq { width: 8px; height: 8px; background: var(--terra); flex: none; }
+.step.tint { background: var(--terra-tint); }
+
+.night { background: var(--night); color: var(--night-ink); }
+.night .row, .row.night { border-color: var(--night-line); }
+.row.night > .n { border-color: var(--night-line); color: #6E6A63; }
+.row.night > .r { border-color: var(--night-line); }
+.tag { display: inline-flex; align-items: center; gap: 8px; padding: 4px 8px; border: 1px solid currentColor; font: 400 10.5px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; }
+.tag::before { content: ""; width: 6px; height: 6px; background: var(--terra); }
+.night .tag { color: #8D8981; }
+.night h2 { font: 500 clamp(28px, 3.6vw, 38px)/1.1 var(--f-head); letter-spacing: -.03em; margin: 20px 0 26px; color: var(--night-ink); }
+.stats { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--night-line); }
+.stat { display: flex; gap: 18px; align-items: center; padding: 22px; border-color: var(--night-line); border-style: solid; border-width: 0; }
+.stat:nth-child(odd) { border-right-width: 1px; }
+.stat:nth-child(-n+2) { border-bottom-width: 1px; }
+.stat .big { flex: none; min-width: 64px; height: 58px; padding: 0 12px; display: grid; place-items: center; border: 1px solid var(--night-line); background: var(--night-2); font: 800 34px/1 var(--f-dot); color: var(--night-ink); }
+.stat .big.hot { color: var(--terra); }
+.stat b { display: block; font: 500 16px/1.3 var(--f-head); color: var(--night-ink); }
+.stat small { display: block; font-size: 12.5px; color: var(--night-ink-2); margin-top: 2px; }
+
+.kv li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--line); align-items: baseline; }
+.kv li:last-child { border-bottom: 0; }
+.kv span:last-child { font-size: 15.5px; color: var(--ink); }
+.kv .mono { color: var(--faint); }
+.sec-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.sec-h h2 { font: 500 24px/1.15 var(--f-head); letter-spacing: -.025em; }
+
+/* ---------- work ---------- */
+.proj { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 20px; align-items: baseline; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.proj-row { cursor: pointer; transition: background 200ms var(--ease); }
+.proj-row:hover { background: var(--paper-hi); }
+.proj-row:hover .n { color: var(--terra-text); }
+.proj h3 { font: 500 22px/1.2 var(--f-head); letter-spacing: -.025em; transition: color 200ms; }
+.proj .line { grid-column: 1; color: var(--ink-2); }
+.proj .meta { grid-column: 2; grid-row: 1 / span 2; display: grid; justify-items: end; gap: 10px; }
+.proj .chip { padding: 3px 8px; border: 1px solid var(--line); font: 400 10px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+.proj .go { display: inline-flex; align-items: center; gap: 8px; font: 400 10.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); transition: color 200ms; }
+.proj .go i { width: 7px; height: 7px; background: var(--line); transition: background 200ms, transform 240ms var(--ease); }
+.proj-row:hover h3 { color: var(--terra-text); }
+.proj-row:hover .go { color: var(--ink); }
+.proj-row:hover .go i { background: var(--terra); transform: rotate(45deg); }
+.also { color: var(--ink-2); max-width: 40em; }
+.also + .also { margin-top: 12px; }
+
+/* ---------- cv ---------- */
+.cv-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+.cv-top p { color: var(--ink-2); max-width: 30em; }
+.xp li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding: 13px 0; border-bottom: 1px dashed var(--line); }
+.xp li:last-child { border-bottom: 0; }
+.xp b { font: 500 15.5px/1.35 var(--f-head); letter-spacing: -.01em; }
+.xp small { grid-column: 1; font-size: 13.5px; color: var(--ink-2); }
+.xp .mono { grid-column: 2; grid-row: 1; color: var(--faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ---------- contact ---------- */
+.contact h2 { font: 500 clamp(40px, 6vw, 64px)/1 var(--f-head); letter-spacing: var(--track); }
+.contact h2 .dotted { color: var(--terra); font-weight: 800; }
+.contact p { color: var(--ink-2); margin-top: 16px; max-width: 30em; font-size: 16px; }
+.links li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px; padding: 13px 0; border-bottom: 1px dashed var(--line); align-items: baseline; }
+.links li:last-child { border-bottom: 0; }
+.links a { font: 500 17px/1.3 var(--f-head); letter-spacing: -.01em; text-decoration: none; overflow-wrap: anywhere; }
+.links a:hover { color: var(--terra-text); }
+.links .mono { color: var(--faint); }
+.grain { position: relative; min-height: 210px; padding: 0 !important; overflow: hidden; background:
+  radial-gradient(70% 140% at 12% 115%, #FB5707 0%, rgba(251,87,7,0) 70%),
+  radial-gradient(60% 130% at 55% 120%, #FF9450 0%, rgba(255,148,80,0) 70%),
+  radial-gradient(50% 120% at 100% 100%, #E2361F 0%, rgba(226,54,31,0) 70%),
+  linear-gradient(180deg, var(--paper) 0%, #FBD3BC 100%); }
+.grain::after { content: ""; position: absolute; inset: 0; opacity: .55; mix-blend-mode: soft-light; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.grain .credits { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: 18px 36px; color: var(--ink-2); }
+
+/* ---------- bar on the sheet's bottom edge ---------- */
+.bar { position: absolute; left: 50%; bottom: 0; transform: translate(-50%, 50%); z-index: 10; display: flex; padding: 4px; background: var(--paper); border: 1.5px solid var(--hard); border-radius: 4px; box-shadow: 4px 4px 0 var(--hard); }
+.bar .pill { position: absolute; top: 4px; left: 0; height: calc(100% - 8px); width: 0; background: var(--ink); z-index: 0; border-radius: 2px; }
+.bar .pill::after { content: ""; position: absolute; top: -1px; right: -1px; width: 6px; height: 6px; background: var(--terra); }
+.bar a { position: relative; z-index: 1; display: inline-flex; align-items: center; height: 38px; padding: 0 18px; text-decoration: none; font: 400 11px/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; transition: color 220ms var(--ease); }
+.bar a:hover { color: var(--ink); }
+.bar a[aria-current="page"] { color: var(--paper); }
+
+/* ---------- project dialog ---------- */
+.ov { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 44px 20px 60px; background: var(--scrim); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); visibility: hidden; opacity: 0; }
+.ov.open { visibility: visible; }
+.dlg { width: min(100%, 760px); max-height: 100%; display: flex; flex-direction: column; overflow: hidden; background: var(--paper); border: 1.5px solid var(--hard); border-radius: 6px; box-shadow: 8px 8px 0 var(--hard); }
+.dlg:focus { outline: none; }
+.handle { display: none; }
+.dlg-top, .dlg-foot { flex: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; background: var(--paper); }
+.dlg-top { border-bottom: 1px solid var(--line); }
+.dlg-foot { border-top: 1px solid var(--line); }
+.dlg-top .mono { display: inline-flex; align-items: center; gap: 10px; color: var(--faint); }
+.dlg-top .mono::before { content: ""; width: 7px; height: 7px; background: var(--terra); }
+.sq-btn { height: 34px; min-width: 34px; padding: 0 12px; display: inline-grid; place-items: center; border: 1px solid var(--line); background: var(--paper-hi); cursor: pointer; font: 400 10.5px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); transition: border-color 200ms, color 200ms, background 200ms; }
+.sq-btn:hover { border-color: var(--ink); color: var(--ink); }
+#d-close { padding: 0; }
+.dlg-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 24px 30px 30px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.dlg h3 { font: 500 30px/1.08 var(--f-head); letter-spacing: -.03em; text-wrap: balance; }
+.dlg .lede { color: var(--ink-2); margin-top: 10px; max-width: 42em; }
+.visual { position: relative; margin: 22px 0 8px; border: 1px solid var(--line); background: var(--paper-2); aspect-ratio: 640 / 380; overflow: hidden; }
+.visual canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.vcap { color: var(--faint); }
+.case { display: grid; margin-top: 22px; border-top: 1px solid var(--line); }
+.case div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.case div:last-child { border-bottom: 0; }
+.case dt { color: var(--faint); }
+.case dd { margin: 0; color: var(--ink); max-width: 40em; }
+.case dd a { color: var(--terra-text); }
+
+/* Warm Fusion specimen card (public) */
+.wf { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto; background: #121212; color: #F2F0EA; }
+.wf-top { position: relative; padding: 18px 20px; overflow: hidden; }
+.wf-top .mono { color: #8D8981; position: relative; z-index: 1; }
+.wf-top .word { position: relative; z-index: 1; font: 800 clamp(40px, 8vw, 76px)/1 var(--f-dot); color: #F2F0EA; margin-top: 6px; }
+.wf-top canvas { position: absolute; inset: 0; }
+.wf-low { display: grid; grid-template-columns: auto 1fr; background: #ECEAE4; color: #141414; }
+.wf-aa { display: grid; place-items: center; width: clamp(80px, 16vw, 120px); aspect-ratio: 1; background: #FB5707; font: 600 clamp(34px, 6vw, 48px)/1 var(--f-head); letter-spacing: -.04em; color: #141414; }
+.wf-meta { padding: 12px 18px; display: grid; align-content: center; gap: 6px; }
+.wf-meta b { font: 500 clamp(18px, 2.4vw, 24px)/1.1 var(--f-head); letter-spacing: -.02em; }
+.wf-scale { display: grid; grid-template-columns: repeat(12, 1fr); height: 12px; }
+
+@media (max-width: 760px) {
+  :root { --gut: 34px; }
+  .frame { top: 12px; bottom: 40px; width: calc(100vw - 24px); }
+  .sheet { box-shadow: 4px 4px 0 var(--hard); }
+  .row { grid-template-columns: var(--gut) minmax(0, 1fr); }
+  .row > .r, .head > .r { display: none; }
+  .head { grid-template-columns: var(--gut) minmax(0, 1fr); }
+  .row > .n { padding: 12px 0 0 0; text-align: center; font-size: 9.5px; }
+  .row > .c { padding: 24px 18px; }
+  .head > .c { padding: 13px 18px; }
+  .head .where { display: none; }
+  .head-r { gap: 0; }
+  .hero-low { grid-template-columns: 1fr; margin-top: 26px; }
+  .actions { justify-items: start; }
+  .field { height: 220px; }
+  .field-grid { grid-template-columns: repeat(3, 1fr); }
+  .field-grid > i:nth-child(3n) { border-right: 0; }
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right-width: 0 !important; border-bottom-width: 1px !important; }
+  .stat:last-child { border-bottom-width: 0 !important; }
+  .kv li, .links li { grid-template-columns: 1fr; gap: 2px; }
+  .proj { grid-template-columns: 1fr; }
+  .proj .meta { grid-column: 1; grid-row: auto; justify-items: start; grid-auto-flow: column; justify-content: start; align-items: center; }
+  .bar a { padding: 0 12px; }
+}
+@media (max-width: 680px) {
+  .ov { place-items: end stretch; padding: 0; }
+  .dlg { width: 100%; max-height: 90%; border-radius: 10px 10px 0 0; border-width: 1.5px 0 0; box-shadow: none; }
+  .handle { display: block; flex: none; width: 40px; height: 4px; background: var(--line); margin: 8px auto 0; }
+  .dlg-body { padding: 18px 18px 24px; }
+  .dlg h3 { font-size: 25px; }
+  .case div { grid-template-columns: 1fr; gap: 2px; }
+}
+</style>
 </head>
-
 <body>
-    <div class="id-card-wrapper">
-        <div class="id-card">
-            <div class="profile-row">
-                <div class="dp">
-                    <div class="dp-arc-outer"></div>
-                    <div class="dp-arc-inner"></div>
-                    <img src="images/aleem-3.jpeg" width="200" height="200" alt="">
-                </div>
-                <div class="desc">
-                    <h1>Aleem Akinyoola</h1>
-                    <p>Graphic/UI Designer | Front-end Developer</p>
-                </div>
-                <div class="skills">
-                    <h3><i class="fas fa-wrench" Style="margin-right: 15px;"></i>Skills & Tools:</h3>
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JS</li>
-                        <li>Vue JS</li>
-                        <li>Photoshop</li>
-                        <li>Adobe Illustrator</li>
-                        <li>AdobeXD</li>
-                        <li>Figma (Prototyping Tool)</li>
-                        <li> Version Control (Git)</li>
+<div class="ground" aria-hidden="true"></div>
 
-                    </ul>
-                </div>
-                <div class="portfolio">
-                    <h3><i class="fas fa-briefcase" Style="margin-right: 15px;"></i>Links</h3>
-                    <div>
-                        <a href="https://www.behance.net/aleem-akinyoola" target="_blank"><span><i class="fab fa-behance" aria-hidden="true"></i></span></a>
-                        <a href="https://www.linkedin.com/in/aleemakinyoola/a" target="_blank"><span><i class="fab fa-linkedin"
-                                    aria-hidden="true"></i></span></a>
-                        <a href="https://github.com/Aleemcode" target="_blank"><span><i class="fab fa-github"
-            aria-hidden="true"></i></span></a>
-                    </div>
+<div class="frame">
+  <main class="sheet" id="sheet">
+    <header class="head">
+      <div class="n"><svg class="px-mark" viewBox="0 0 7 7" aria-hidden="true"><path fill="#FB5707" d="M3 0h1v7H3zM0 3h7v1H0zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM5 5h1v1H5z"/></svg></div>
+      <div class="c">
+        <a class="brand" href="#home">Aleem Akinyoola</a>
+        <div class="head-r">
+          <div class="theme" role="group" aria-label="Colour mode"><button type="button" data-t="light" aria-pressed="true">Light</button><button type="button" data-t="dark" aria-pressed="false">Dark</button></div></div>
+      </div>
+      <div class="r"></div>
+    </header>
 
-                    <div class="pen">
-                        <h3>UI Designs & Web Projects</h3>
-                        <div class="pen1">
-                            <a href="https://www.figma.com/proto/0NdwRHrkJf5dM39POvDGv1/TOV?node-id=47%3A6&scaling=min-zoom" target="_blank">TOV Mockup</a>
-                            <a href="https://www.figma.com/proto/EW6tm4ume2vD6Vg3CJYtTp/myKey.ng?node-id=11%3A0&viewport=187%2C224%2C0.06842504441738129&scaling=min-zoom" target="_blank">HOSTEL WEB APP MOCKUP</a>
-                            <a href="https://www.figma.com/proto/t44kC5oaEhN7RLPvdIZ28E/Amni-Landing-Page?node-id=1%3A12&viewport=487%2C543%2C0.2170775681734085&scaling=min-zoom" target="_blank">Amni Mockup Designs</a>
-                            <a href="http://amniv9.yokeserver.com/" target="_blank">AMNI PETROLEUM (Vue JS Project)</a>
-                            <a href="http://bit.ly/OAKE-MOCKUPS" target="_blank">OAKE Mockup Designs</a>
-                            <a href="https://www.twooneventure.com/" target="_blank">TOV Frontend Project</a>
-                            <a href="https://www.figma.com/proto/SpnopVCmtKixQIzEUWxLlu7i/REDGATE-PROJECT?node-id=2%3A81&viewport=200%2C356%2C0.07734709978103638&scaling=scale-down" target="_blank">REDGATE MOBILE APP
-                                PROJECT</a>
-                                <!-- <a href="http://www.primaldux.com/" target="_blank">Primaldux Frontend Project</a> -->
-                        </div>
-
-                    </div>
-                </div>
+    <div class="stage" id="stage">
+      <!-- HOME -->
+      <section class="view" id="home" data-view>
+        <div class="row band tight"><div class="n">01</div><div class="c mono s"><span class="live"></span>Available for remote roles · Abuja, Nigeria (WAT, UTC+1)</div><div class="r"></div></div>
+        <div class="row hero"><div class="n">02</div><div class="c">
+          <h1 class="s"><svg class="ast" viewBox="0 0 7 7" aria-hidden="true"><path fill="currentColor" d="M3 0h1v7H3zM0 3h7v1H0zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM5 5h1v1H5z"/></svg>I design<br>fintech,<br>trading and<br><span class="dotted">data products</span>.</h1>
+          <div class="hero-low">
+            <p class="s">I lead the design team at AFEX, where we build commodity trading platforms and the design system they share. Before design I wrote frontend code, and I still do.</p>
+            <div class="actions s">
+              <div class="actions-top">
+                <a class="btn" href="#work"><svg viewBox="0 0 7 7" aria-hidden="true"><path fill="#FB5707" d="M3 0h1v7H3zM0 3h7v1H0zM1 1h1v1H1zM5 1h1v1H5zM1 5h1v1H1zM5 5h1v1H5z"/></svg>See the work</a>
+                <a class="link" href="cv.pdf" target="_blank" rel="noopener">Download CV ↗</a>
+              </div>
+              <button class="copy" type="button" data-copy="aleemakinyoola@gmail.com"><span>$ aleemakinyoola@gmail.com</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 4h7v7H4zM1 8V1h7" fill="none" stroke="currentColor"/></svg></button>
             </div>
-        </div>
+          </div>
+        </div><div class="r"></div></div>
+        <div class="row"><div class="n">03</div><div class="c field" id="field">
+          <canvas id="field-cv" aria-hidden="true"></canvas>
+          <div class="field-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div id="steps" aria-label="How a project moves: research, flows, system, prototype, build"></div>
+        </div><div class="r"></div></div>
+        <div class="row night"><div class="n">04</div><div class="c">
+          <span class="tag s">In numbers</span>
+          <h2 class="s">A few facts.</h2>
+          <div class="stats">
+            <div class="stat s"><span class="big">6</span><div><b>Years in UI/UX</b><small>Most of them at AFEX.</small></div></div>
+            <div class="stat s"><span class="big">4</span><div><b>Designers on my team</b><small>At AFEX, since 2024.</small></div></div>
+            <div class="stat s"><span class="big">5</span><div><b>African markets</b><small>Where our trading platforms run.</small></div></div>
+            <div class="stat s"><span class="big hot">96%</span><div><b>Figma assessment</b><small>Percentile on Uxcel, February 2022.</small></div></div>
+          </div>
+        </div><div class="r"></div></div>
+        <div class="row"><div class="n">05</div><div class="c">
+          <div class="sec-h s"><h2>What I do</h2><span class="mono faint">Day to day</span></div>
+          <ul class="kv">
+            <li class="s"><span class="mono">Product</span><span>Research, information architecture and full user flows, from wireframes to high-fidelity prototypes</span></li>
+            <li class="s"><span class="mono">Systems</span><span>Design tokens, Figma component libraries with variants and auto layout, Radix and shadcn/ui on the code side</span></li>
+            <li class="s"><span class="mono">Prototyping</span><span>Interactive Figma prototypes, motion prototypes and micro-interactions with Framer Motion</span></li>
+            <li class="s"><span class="mono">AI</span><span>I use AI to explore ideas and write UX copy in Figma, build working prototypes and make visual assets. I also write design system and brand guides that AI tools can follow.</span></li>
+            <li class="s"><span class="mono">Frontend</span><span>HTML, CSS, JavaScript and Tailwind CSS. I can build what I design and review it with engineers.</span></li>
+            <li class="s"><span class="mono">Brand</span><span>Landing pages such as cudie.ng, visual identity and type systems, and AI design agents that make on-brand marketing assets</span></li>
+          </ul>
+        </div><div class="r"></div></div>
+        <div class="row fill"><div class="n"></div><div class="c"></div><div class="r"></div></div>
+      </section>
 
+      <!-- WORK -->
+      <section class="view" id="work" data-view hidden>
+        <div class="row band tight"><div class="n">01</div><div class="c mono s">Selected work · four are under NDA, so their visuals are abstract</div><div class="r"></div></div>
+        <div id="projects"></div>
+        <div class="row"><div class="n">+</div><div class="c"><p class="also s">Also: the AFEX design system across five markets, and four AI brand design agents, one built on Warm Fusion and three for other brands.</p>
+          <p class="also s">I built Warm Fusion for Maven Builder Academy, my academy, where I teach people to build with AI and to build with taste. Making things with intent, down to the small details, is the part of this work I care about most.</p></div><div class="r"></div></div>
+        <div class="row fill"><div class="n"></div><div class="c"></div><div class="r"></div></div>
+      </section>
+
+      <!-- CV -->
+      <section class="view" id="cv" data-view hidden>
+        <div class="row"><div class="n">01</div><div class="c">
+          <div class="cv-top s">
+            <p>I joined AFEX in 2021 as a designer and frontend developer, and I now lead the design team. Before that I did frontend, brand and IT work. I studied Computer Engineering.</p>
+            <a class="btn" href="cv.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 7 7" aria-hidden="true"><path fill="#FB5707" d="M3 0h1v5H3zM1 3h1v1H1zM5 3h1v1H5zM2 4h1v1H2zM4 4h1v1H4zM0 6h7v1H0z"/></svg>Download CV (PDF)</a>
+          </div>
+        </div><div class="r"></div></div>
+        <div class="row"><div class="n">02</div><div class="c">
+          <div class="sec-h s"><h2>Experience</h2><span class="mono faint">2015–now</span></div>
+          <ol class="xp">
+            <li class="s"><b>AFEX</b><small>Design Team Lead, leading four designers</small><span class="mono">2024–now</span></li>
+            <li class="s"><b>AFEX</b><small>Senior UX Designer</small><span class="mono">2024</span></li>
+            <li class="s"><b>AFEX</b><small>UI/UX Designer</small><span class="mono">2023–2024</span></li>
+            <li class="s"><b>AFEX</b><small>UI/UX Designer and Frontend Developer, building Django templates in HTML, CSS and JavaScript</small><span class="mono">2021–2022</span></li>
+            <li class="s"><b>Yoke Solutions</b><small>UI/UX Designer and Frontend Developer</small><span class="mono">2019–2021</span></li>
+            <li class="s"><b>Primaldux</b><small>Graphic and UI Designer, freelance</small><span class="mono">2018–2019</span></li>
+            <li class="s"><b>Stallion Group</b><small>IT Engineer</small><span class="mono">2017–2019</span></li>
+            <li class="s"><b>iTrain Skills Hub</b><small>Graphic Designer, freelance</small><span class="mono">2015–2019</span></li>
+            <li class="s"><b>Ladoke Akintola University of Technology</b><small>B.Eng. Computer Engineering</small><span class="mono">2010–2015</span></li>
+          </ol>
+        </div><div class="r"></div></div>
+        <div class="row"><div class="n">03</div><div class="c">
+          <div class="sec-h s"><h2>Achievements</h2><span class="mono faint">Certified</span></div>
+          <ol class="xp">
+            <li class="s"><b>Designing Product Experiments, The Fountain Institute, Berlin</b><small>Certificate of completion. Product discovery experiments, experiment design, fake door tests, UX metrics, product delivery experiments and facilitating experimentation.</small><span class="mono">Apr 2022</span></li>
+            <li class="s"><b>Figma skills assessment, Uxcel</b><small>Scored 315, better than 96% of everyone who has taken it. Credentials verified.</small><span class="mono">Feb 2022</span></li>
+          </ol>
+        </div><div class="r"></div></div>
+        <div class="row fill"><div class="n"></div><div class="c"></div><div class="r"></div></div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="view" id="contact" data-view hidden>
+        <div class="row"><div class="n">01</div><div class="c contact">
+          <h2 class="s">Get in<br><span class="dotted">touch</span>.</h2>
+          <p class="s">Email is the quickest way to reach me. I'm open to remote roles.</p>
+        </div><div class="r"></div></div>
+        <div class="row"><div class="n">02</div><div class="c">
+          <ul class="links">
+            <li class="s"><span class="mono">Email</span><a href="mailto:aleemakinyoola@gmail.com">aleemakinyoola@gmail.com</a></li>
+            <li class="s"><span class="mono">LinkedIn</span><a href="https://www.linkedin.com/in/aleemakinyoola/">in/aleemakinyoola</a></li>
+            <li class="s"><span class="mono">GitHub</span><a href="https://github.com/Aleemcode">Aleemcode</a></li>
+            <li class="s"><span class="mono">System</span><a href="https://www.mavenbuilderacademy.com.ng/warm-fusion">Warm Fusion</a></li>
+          </ul>
+        </div><div class="r"></div></div>
+        <div class="row fill"><div class="n"></div><div class="c grain"><div class="credits mono"><span>© 2026 Aleem Akinyoola</span><span>Extracted from Warm Fusion · Set in Space Grotesk, Geist, Geist Mono and Doto</span></div></div><div class="r"></div></div>
+      </section>
     </div>
+  </main>
 
+  <nav class="bar" id="bar" aria-label="Sections">
+    <span class="pill" id="pill" aria-hidden="true"></span>
+    <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#cv">CV</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+
+<div class="ov" id="ov">
+  <div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="d-title" tabindex="-1">
+    <span class="handle" aria-hidden="true"></span>
+    <div class="dlg-top">
+      <span class="mono" id="d-meta"></span>
+      <button class="sq-btn" type="button" id="d-close" aria-label="Close project"><svg width="11" height="11" viewBox="0 0 12 12" aria-hidden="true"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    </div>
+    <div class="dlg-body" id="dbody">
+      <h3 id="d-title"></h3>
+      <p class="lede" id="d-lede"></p>
+      <figure class="visual" id="d-visual"></figure>
+      <p class="mono vcap" id="d-cap"></p>
+      <dl class="case" id="d-case"></dl>
+    </div>
+    <div class="dlg-foot">
+      <button class="sq-btn" type="button" id="d-prev"></button>
+      <button class="sq-btn" type="button" id="d-next"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@14.9.1/dist/motion.js"></script>
+<script>
+(function () {
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M = window.Motion;
+  var SPRING = { type: 'spring', stiffness: 420, damping: 36, mass: 0.9 };
+  var SOFT = { type: 'spring', stiffness: 260, damping: 30 };
+  function anim(el, kf, opts) {
+    if (!M || reduce || !el || el.length === 0) {
+      var list = !el ? [] : (el.length !== undefined ? [].slice.call(el) : [el]);
+      list.forEach(function (n) { Object.keys(kf).forEach(function (k) { var v = kf[k]; v = Array.isArray(v) ? v[v.length - 1] : v; if (k === 'x' || k === 'y' || k === 'scale') return; n.style[k] = v; }); n.style.transform = ''; });
+      return Promise.resolve();
+    }
+    return M.animate(el, kf, opts).finished;
+  }
+  var stagger = function (s, o) { return M && M.stagger ? M.stagger(s, o) : 0; };
+  var css = function (v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); };
+  var DPR = Math.min(2, window.devicePixelRatio || 1);
+
+  /* ---------- NDA sketches: layouts drawn as shapes, then shown only as a dot matrix ---------- */
+  var VW = 640, VH = 380;
+  function shapes(a) {
+    var list = [];
+    var S = {
+      R: function (x, y, w, h, r, k, op) { list.push({ t: 'r', x: x, y: y, w: w, h: h, r: r || 0, k: k, op: op == null ? 1 : op }); },
+      C: function (x, y, r, k, op) { list.push({ t: 'c', x: x, y: y, r: r, k: k, op: op == null ? 1 : op }); },
+      L: function (d, k, w) { list.push({ t: 'l', d: d, k: k, w: w }); },
+      O: function (x, y, r, w, k, dash, rot) { list.push({ t: 'o', x: x, y: y, r: r, w: w, k: k, dash: dash, rot: rot || 0 }); }
+    };
+    S.side = function (w) { S.R(0, 0, w || 132, VH, 0, 'g'); S.R(16, 18, 48, 14, 4, 'a'); for (var i = 0; i < 8; i++) S.R(16, 60 + i * 30, i === 4 ? 100 : 70 + (i % 3) * 10, 9, 4, i === 4 ? 'a' : 'g2', i === 4 ? .45 : 1); };
+    S.rows = function (x, y, w, n) { for (var i = 0; i < n; i++) { var yy = y + i * 26; S.R(x, yy, w, 1.5, 0, 'g2'); S.R(x + 8, yy + 9, 54, 7, 3, 'g2'); S.R(x + 90, yy + 9, 90, 7, 3, 'g'); S.R(x + 210, yy + 9, 60, 7, 3, 'g'); S.R(x + 300, yy + 9, 40, 7, 3, 'g'); S.R(x + w - 48, yy + 8, 38, 9, 5, i % 3 === 1 ? 'red' : 'green', .8); } };
+    return { S: S, list: list };
+  }
+  var DRAW = {
+    ecn: function (S) { S.side(); S.R(156, 22, 120, 12, 4, 'g2'); S.R(548, 18, 72, 22, 6, 'a');
+      S.R(156, 56, 464, 76, 8, 'g'); S.R(172, 72, 74, 20, 6, 'a', .5); S.R(254, 72, 74, 20, 6, 'g2'); S.R(336, 72, 40, 20, 6, 'g2'); S.R(384, 72, 64, 20, 6, 'g2');
+      S.R(172, 102, 44, 18, 6, 'a', .5); S.R(222, 102, 40, 18, 6, 'g2'); S.R(268, 102, 40, 18, 6, 'g2'); S.R(314, 102, 40, 18, 6, 'g2'); S.R(480, 72, 124, 20, 6, 'g2');
+      S.R(156, 146, 464, 30, 8, 'g'); S.R(540, 152, 72, 18, 6, 'a', .5); S.rows(156, 188, 464, 7); },
+    komex: function (S) { S.side(); S.R(156, 22, 150, 12, 4, 'g2');
+      for (var i = 0; i < 5; i++) { S.C(176 + i * 70, 62, 7, i < 3 ? 'a' : 'g2'); if (i < 4) S.R(186 + i * 70, 60, 50, 3, 1, i < 2 ? 'a' : 'g2'); }
+      for (var j = 0; j < 6; j++) { var x = 156 + (j % 3) * 114, y = 92 + Math.floor(j / 3) * 132; S.R(x, y, 104, 120, 8, 'g'); S.R(x + 10, y + 10, 84, 50, 6, 'g2'); S.R(x + 10, y + 70, 60, 7, 3, 'g2'); S.R(x + 10, y + 84, 84, 5, 3, 'g2'); S.R(x + 10, y + 84, 30 + j * 9, 5, 3, 'a', .8); S.R(x + 10, y + 98, 40, 12, 6, j === 1 ? 'a' : 'g2'); }
+      S.R(500, 92, 120, 252, 8, 'g'); S.R(512, 106, 70, 9, 4, 'g2'); S.R(512, 126, 96, 24, 6, 'clear'); S.R(512, 160, 96, 7, 3, 'g2'); S.R(512, 174, 70, 7, 3, 'g2'); S.R(512, 200, 96, 1.5, 0, 'g2');
+      S.R(512, 214, 50, 7, 3, 'g2'); S.R(578, 214, 30, 7, 3, 'g2'); S.R(512, 228, 60, 7, 3, 'g2'); S.R(578, 228, 30, 7, 3, 'g2'); S.R(512, 300, 96, 30, 8, 'a'); },
+    invex: function (S) { S.side(); S.R(156, 22, 140, 12, 4, 'g2'); S.R(536, 18, 84, 22, 6, 'a');
+      for (var i = 0; i < 4; i++) { S.R(156 + i * 118, 56, 108, 64, 8, 'g'); S.R(168 + i * 118, 68, 44, 7, 3, 'g2'); S.R(168 + i * 118, 84, 70, 13, 4, 'g2'); S.R(168 + i * 118, 104, 32, 6, 3, i === 3 ? 'red' : 'green', .8); }
+      S.R(156, 132, 300, 120, 8, 'g'); S.L('M170 230 C210 214 230 222 260 196 S320 180 350 168 S410 150 440 160', 'a', 6); S.L('M170 236 C220 230 260 236 300 220 S380 214 440 206', 'g2', 5);
+      S.R(466, 132, 154, 120, 8, 'g'); S.O(543, 192, 34, 13, 'g2'); S.O(543, 192, 34, 13, 'a', [130, 214], -Math.PI / 2); S.rows(156, 266, 464, 4); },
+    cudie: function (S) { S.side(118); S.R(140, 22, 130, 12, 4, 'g2');
+      for (var i = 0; i < 3; i++) { S.R(140 + i * 104, 50, 96, 58, 8, 'g'); S.R(150 + i * 104, 62, 40, 6, 3, 'g2'); S.R(150 + i * 104, 76, 70, 12, 4, 'g2'); S.R(150 + i * 104, 94, 30, 6, 3, 'green', .8); }
+      S.R(140, 120, 304, 130, 8, 'g'); S.R(152, 182, 280, 1.5, 0, 'g2');
+      var up = [40, 26, 34, 34, 22, 46, 44, 18], dn = [20, 32, 24, 24, 12, 8, 14, 16];
+      for (var j = 0; j < up.length; j++) { S.R(160 + j * 34, 182 - up[j], 18, up[j], 3, 'a', .45); S.R(160 + j * 34, 184, 18, dn[j], 3, 'a'); }
+      S.rows(140, 266, 304, 4);
+      S.R(470, 16, 150, 348, 22, 'g2', .55); S.R(478, 26, 134, 328, 16, 'clear'); S.R(478, 26, 134, 328, 16, 'g', .5);
+      S.R(490, 44, 50, 8, 4, 'g2'); S.R(490, 64, 110, 64, 10, 'a'); S.R(500, 78, 50, 6, 3, 'clear'); S.R(500, 92, 80, 12, 4, 'clear');
+      for (var k = 0; k < 4; k++) { S.C(503 + k * 28, 152, 10, k === 0 ? 'a' : 'g2'); }
+      for (var m = 0; m < 5; m++) { var yy = 182 + m * 30; S.C(500, yy + 8, 8, 'g2'); S.R(514, yy + 2, 50, 6, 3, 'g2'); S.R(514, yy + 12, 34, 5, 3, 'g'); S.R(572, yy + 4, 28, 7, 3, m % 2 ? 'green' : 'g2'); }
+      S.R(490, 330, 110, 14, 7, 'g2'); },
+    sherlock: function (S) { S.R(0, 0, 150, VH, 0, 'g'); S.R(16, 18, 60, 14, 4, 'a'); S.R(16, 48, 118, 24, 6, 'clear');
+      for (var i = 0; i < 7; i++) S.R(16, 88 + i * 26, 70 + (i % 4) * 12, 8, 4, i === 0 ? 'a' : 'g2', i === 0 ? .6 : 1);
+      S.R(380, 24, 230, 30, 14, 'a', .25); S.R(394, 35, 150, 8, 4, 'a', .8); S.C(186, 86, 11, 'a'); S.R(206, 76, 360, 168, 10, 'g'); S.R(220, 90, 160, 8, 4, 'g2');
+      var hs = [46, 70, 58, 96, 84, 120, 104]; for (var j = 0; j < hs.length; j++) S.R(230 + j * 44, 226 - hs[j], 26, hs[j], 4, j === 5 ? 'a' : 'g2');
+      S.R(206, 256, 86, 22, 11, 'g2'); S.R(300, 256, 96, 22, 11, 'g2'); S.R(404, 256, 76, 22, 11, 'a', .4);
+      S.R(170, 318, 450, 44, 22, 'g'); S.R(190, 336, 180, 8, 4, 'g2'); S.C(596, 340, 14, 'a'); }
+  };
+  function rr(ctx, x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h); }
+  function paintShapes(list, accent) {
+    var cv = document.createElement('canvas'); cv.width = VW; cv.height = VH; var ctx = cv.getContext('2d');
+    var col = { g: 'rgba(0,0,0,.2)', g2: 'rgba(0,0,0,.42)', a: accent, red: '#E5484D', green: '#30A46C' };
+    list.forEach(function (s) {
+      ctx.globalCompositeOperation = s.k === 'clear' ? 'destination-out' : 'source-over';
+      ctx.globalAlpha = s.op == null ? 1 : s.op;
+      var c = s.k === 'clear' ? '#000' : col[s.k];
+      if (s.t === 'r') { ctx.fillStyle = c; rr(ctx, s.x, s.y, s.w, s.h, s.r); ctx.fill(); }
+      else if (s.t === 'c') { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2); ctx.fill(); }
+      else if (s.t === 'l') { ctx.strokeStyle = c; ctx.lineWidth = s.w; ctx.lineCap = 'round'; ctx.stroke(new Path2D(s.d)); }
+      else if (s.t === 'o') { ctx.strokeStyle = c; ctx.lineWidth = s.w; ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.rot); ctx.setLineDash(s.dash || []); ctx.beginPath(); ctx.arc(0, 0, s.r, 0, Math.PI * 2); ctx.stroke(); ctx.restore(); }
+    });
+    return cv;
+  }
+  var CELL = 7;
+  function dotMatrix(host, id, accent) {
+    var b = shapes(accent); DRAW[id](b.S);
+    var src = paintShapes(b.list, accent);
+    var cols = Math.floor(VW / CELL), rows = Math.floor(VH / CELL);
+    var small = document.createElement('canvas'); small.width = cols; small.height = rows;
+    var sctx = small.getContext('2d'); sctx.imageSmoothingEnabled = true; sctx.imageSmoothingQuality = 'high';
+    sctx.drawImage(src, 0, 0, cols, rows);
+    var px = sctx.getImageData(0, 0, cols, rows).data;
+    var dots = [];
+    for (var y = 0; y < rows; y++) for (var x = 0; x < cols; x++) {
+      var i = (y * cols + x) * 4, al = px[i + 3] / 255, r = px[i], g = px[i + 1], bl = px[i + 2];
+      var sat = Math.max(r, g, bl) - Math.min(r, g, bl);
+      dots.push({ x: x, y: y, a: al, rgb: sat > 40 ? 'rgb(' + r + ',' + g + ',' + bl + ')' : null, d: (x / cols) * 520 + Math.random() * 380 });
+    }
+    var cv = document.createElement('canvas'); host.appendChild(cv);
+    var ctx = cv.getContext('2d'), ink = css('--ink'), t0 = performance.now(), mx = -999, my = -999, raf = 0, W, H, sx, sy;
+    function size() { var r = host.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); sx = W / cols; sy = H / rows; }
+    function draw(now) {
+      var t = reduce ? 1e9 : now - t0, done = true;
+      ctx.clearRect(0, 0, W, H);
+      for (var k = 0; k < dots.length; k++) {
+        var p = dots[k], cx = (p.x + .5) * sx, cy = (p.y + .5) * sy;
+        var e = Math.max(0, Math.min(1, (t - p.d) / 260)); if (e < 1) done = false;
+        var dist = Math.hypot(cx - mx, cy - my), boost = dist < 60 ? (1 - dist / 60) : 0;
+        if (p.a < 0.04) { ctx.globalAlpha = .1 * e; ctx.fillStyle = ink; ctx.fillRect(cx - .6, cy - .6, 1.2, 1.2); continue; }
+        var rad = (0.9 + p.a * 2.3) * (1 + boost * .7) * (e < 1 ? e * e * (3 - 2 * e) : 1);
+        ctx.globalAlpha = p.rgb ? Math.min(1, .45 + p.a) : Math.min(.95, .18 + p.a * 1.1);
+        ctx.fillStyle = p.rgb || ink;
+        ctx.beginPath(); ctx.arc(cx, cy, Math.min(rad, sx * .48), 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      raf = done ? 0 : requestAnimationFrame(draw);
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(draw); }
+    size(); kick();
+    host.addEventListener('pointermove', function (e) { var r = host.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; kick(); });
+    host.addEventListener('pointerleave', function () { mx = my = -999; kick(); });
+    var ro = new ResizeObserver(function () { size(); kick(); }); ro.observe(host);
+    return function () { ro.disconnect(); cancelAnimationFrame(raf); };
+  }
+
+  /* Warm Fusion: the real system, shown as a specimen card */
+  function wfCard(host) {
+    var steps = ['#FEFCFB','#FFF7ED','#FFF0EA','#FED7AA','#FDBA74','#FB923C','#F97316','#EA580C','#FB5707','#D44200','#9A3412','#431407'];
+    host.innerHTML = '<div class="wf"><div class="wf-top"><canvas></canvas><div class="mono">Design system · v1.1.0</div><div class="word">Warm Fusion</div></div>' +
+      '<div class="wf-low"><div class="wf-aa">Aa</div><div class="wf-meta"><span class="mono" style="color:#8E8A82">Open source · MIT</span><b>Bricolage, Instrument Sans, Space Mono</b><div class="wf-scale">' +
+      steps.map(function (h) { return '<i style="background:' + h + '"></i>'; }).join('') + '</div></div></div></div>';
+    var top = host.querySelector('.wf-top'), cv = top.querySelector('canvas'), ctx = cv.getContext('2d');
+    function paint() { var r = top.getBoundingClientRect(); cv.width = r.width * DPR; cv.height = r.height * DPR; cv.style.width = r.width + 'px'; cv.style.height = r.height + 'px'; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      var s = 9, cols = Math.floor(r.width / s), rows = Math.floor(r.height / s);
+      for (var x = 0; x < cols; x++) { var h = rows * (.25 + .35 * Math.abs(Math.sin(x * .37) * Math.cos(x * .11))); for (var y = 0; y < rows; y++) { var fromB = rows - y; var on = fromB < h && Math.random() < (1 - fromB / h) * 1.2;
+        ctx.fillStyle = on ? '#FB5707' : 'rgba(255,255,255,.05)'; ctx.fillRect(x * s + 1.5, y * s + 1.5, s - 3, s - 3); } } }
+    requestAnimationFrame(paint);
+  }
+
+  var P = [
+    { id: 'ecn', name: 'ECN, Africa Exchange admin system', short: 'ECN', year: '2022–23', tag: 'Web admin', accent: '#E5261F',
+      line: 'One admin system for a commodity exchange’s clearance, trading and finance teams.',
+      lede: 'A redesign of ECN, the internal admin system that runs Africa Exchange’s high-volume commodity exchange. It’s used by trade clearance, trading operations, admin and finance teams. I was the sole designer and led the redesign across the whole system, working with one product manager.',
+      problem: 'Related tasks were spread across many pages. Trade matching and cross-trade resolution were especially slow, which held up clearance and made trading targets harder to hit on time.',
+      work: 'Redesigned client management, market management, trade operations, reporting and accounting as one system. Brought trade matching and cross-trade resolution onto a single page. Standardised navigation, tables, filters, forms and actions so dense screens are quick to scan and finish.',
+      result: 'Clearance teams work faster, and the redesign supported Africa Exchange in meeting its trading targets on time and its annual trading goals.' },
+    { id: 'komex', name: 'KOMEX, Kenya’s commodity exchange', short: 'KOMEX', year: '2025–26', tag: 'Web and admin', accent: '#B7791F',
+      line: 'A full commodity exchange for Kenya, from warehouse deposit to settlement.',
+      lede: 'KOMEX is a commodity exchange in Kenya. I designed the exchange end to end for depositors, buyers and the exchange’s operations teams, across the web platform and the admin dashboard. I was the sole designer, working with one product manager.',
+      problem: 'An exchange runs on handoffs between warehouses, sellers, buyers and exchange teams. Each of them needs to know whether a lot is ready to trade, how much a buyer can bid, how a trade ended and whether payment is due.',
+      work: 'Mapped the full journey across five stages: deposit, lot creation, catalogue, auction and settlement. Explored guided and workspace-based flows for preparing lots, setting reserves and publishing the catalogue. Designed bidding and settlement with clear bid status, buying limits, payment deadlines and fee breakdowns, plus the operations views that run the exchange behind them.',
+      result: 'A complete exchange design covering both participant and operations workflows, built for clearer trading and more transparent settlement.' },
+    { id: 'cudie', name: 'Cudie, payments for farmers and beyond', short: 'Cudie', year: '', tag: 'Mobile, admin and brand', accent: '#7738DD',
+      line: 'A payments product with customer, agent and admin apps, one design system and its own brand.',
+      lede: 'Cudie is AFEX’s payments platform, built for farmers and beyond: send and receive money, buy airtime and data, pay bills and use Cudie cards. I led the design of the customer and agent mobile apps and the admin web app, built the Cudie design system, and designed the landing page at cudie.ng.',
+      problem: 'Cudie serves three very different users. Admins scan card inventory, fees and revenue. Agents manage stock and issue cards. Customers activate cards, set PINs and redeem rewards. All of it had to feel like one product.',
+      work: 'Built one design system for all three: a violet brand palette and neutrals mapped to clear roles, a type scale with set treatments for money amounts and dashboard figures, and shared components, from status badges and data rows on desktop to PIN entry, keypads and bottom sheets on mobile. Designed the card artwork and brand assets, and the landing page.',
+      result: 'One product family across the admin, agent and customer apps, the cards and the website, live at <a href="https://cudie.ng">cudie.ng</a>.', mixed: true },
+    { id: 'invex', name: 'INVEX, from invoicing to liquidity', short: 'INVEX', year: '2025', tag: 'Web', accent: '#3E63DD',
+      line: 'Invoicing, approvals and invoice financing in one workspace.',
+      lede: 'A business finance platform that brings invoice management, payment tracking, compliance and invoice financing into one workspace. I was the sole designer on a product team of six.',
+      problem: 'Verifying a business, creating invoices, managing approvals and raising finance are each complex on their own. The challenge was to connect them into one easy path without hiding the detail finance teams rely on.',
+      work: 'Linked onboarding, two-factor setup and business verification (KYB) to a central finance dashboard. Designed single and bulk invoice creation, payment status tracking, approval workflows and role-based permissions. Extended the journey into factoring, with listings, bids and available funds. A consistent sidebar, summary cards, filterable tables, grouped forms and clear status indicators keep information-heavy screens readable.',
+      result: 'One journey from business verification to invoice management to financing, designed to give finance teams clearer oversight with less scattered admin.' },
+    { id: 'sherlock', name: 'Sherlock, AI data assistant', short: 'Sherlock', year: '2024', tag: 'Internal tool', accent: '#0E9F8E',
+      line: 'Ask the company’s data a question and get a chart back.',
+      lede: 'An internal AI data assistant that lets anyone in the organisation ask questions of company data in plain language, see the answer as a chart, and keep track of it through reports and alerts. I was the lead designer, with a second designer on some features.',
+      problem: 'Company data sat with a few analysts. Anyone else who needed a number had to request it and wait, so data knowledge stayed in one team and everyday decisions were slower than they needed to be.',
+      work: 'Designed a conversational explorer where people ask a business question and get a chart back, with no query language. Added self-service reports and dashboards for saving and sharing answers, and alerts that flag when a number changes. Gave analysts dataset configuration, and administrators user and role management to control who sees what. Built a variable-driven design system (319 variables, light and dark, four accent themes) so a feature-rich product stayed consistent as it grew.',
+      result: 'Opened company data to the whole organisation. Business users can answer their own questions, analysts are freed from routine requests, and access stays governed by role.' },
+    { id: 'warm-fusion', name: 'Warm Fusion design system', short: 'Warm Fusion', year: '2026', tag: 'Open source', accent: '#FB5707', public: true,
+      line: 'My open-source design system. This site is an extraction of it.',
+      lede: 'A design system I built from scratch for Maven Builder Academy, the academy I run to teach people to build with AI and with taste. It covers the academy’s website, app and marketing. Radix colour scales, tactile components and four font stacks. It ships with agent-ready files (SKILL.md, design.md, tokens.css and a Tailwind preset) so AI coding tools produce on-brand UI from the start. Open source and MIT licensed.',
+      problem: 'The academy’s website, app and marketing needed one look that people and AI tools could both apply without drifting.',
+      work: 'Built the colour scales, type stacks, tactile components and usage rules, then packaged them as files an AI agent can read directly. On top of it I built a marketing agent that produces the academy’s marketing and brand design consistently. I have since built three more agents like it for other brands.',
+      result: 'One system across the academy’s products and marketing. This portfolio is an extraction of it, with a little more intent added. Published openly at <a href="https://www.mavenbuilderacademy.com.ng/warm-fusion">mavenbuilderacademy.com.ng/warm-fusion</a>.' }
+  ];
+
+  var byId = {}; P.forEach(function (p, i) { p.i = i; byId[p.id] = p; });
+
+  /* ---------- work rows ---------- */
+  var list = document.getElementById('projects');
+  P.forEach(function (p, i) {
+    var row = document.createElement('div'); row.className = 'row proj-row';
+    row.innerHTML = '<div class="n">0' + (i + 2) + '</div><div class="c"><button type="button" class="proj s" data-id="' + p.id + '"><h3></h3><span class="line"></span><span class="meta"><span class="chip">' + p.tag + (p.year ? ' · ' + p.year : '') + '</span><span class="go"><i></i>' + (p.public ? 'Open' : 'View') + '</span></span></button></div><div class="r"></div>';
+    row.querySelector('h3').textContent = p.name; row.querySelector('.line').textContent = p.line;
+    row.addEventListener('click', function () { location.hash = p.id; });
+    list.appendChild(row);
+  });
+
+  /* ---------- sound: short synthesized clicks, made on the spot with Web Audio ---------- */
+  var SFX = (function () {
+    var ctx = null, noise = null;
+    function ac() {
+      try { ctx = ctx || new (window.AudioContext || window.webkitAudioContext)(); if (ctx.state === 'suspended') ctx.resume(); } catch (e) { ctx = null; }
+      return ctx;
+    }
+    function click(c, t, level) {
+      if (!noise) { noise = c.createBuffer(1, Math.floor(c.sampleRate * 0.02), c.sampleRate); var d = noise.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3); }
+      var src = c.createBufferSource(), hp = c.createBiquadFilter(), g = c.createGain();
+      src.buffer = noise; hp.type = 'highpass'; hp.frequency.value = 2600; g.gain.value = level;
+      src.connect(hp); hp.connect(g); g.connect(c.destination); src.start(t);
+    }
+    function tone(c, t, f0, f1, dur, level, type) {
+      var o = c.createOscillator(), g = c.createGain();
+      o.type = type || 'sine'; o.frequency.setValueAtTime(f0, t); if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, t + dur * 0.7);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(level, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur + 0.02);
+    }
+    var NOTES = [587.33, 659.25, 783.99, 880];
+    function sweep(c, t, f0, f1, dur, level) {
+      var len = Math.floor(c.sampleRate * dur), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / len);
+      var src = c.createBufferSource(), bp = c.createBiquadFilter(), g = c.createGain();
+      src.buffer = buf; bp.type = 'bandpass'; bp.Q.value = 1.4; bp.frequency.setValueAtTime(f0, t); bp.frequency.exponentialRampToValueAtTime(f1, t + dur);
+      g.gain.value = level; src.connect(bp); bp.connect(g); g.connect(c.destination); src.start(t);
+    }
+    return {
+      open: function () { var c = ac(); if (!c) return; var t = c.currentTime + 0.005; sweep(c, t, 500, 2400, 0.2, 0.09); tone(c, t + 0.06, 523.25, 523.25, 0.14, 0.035, 'triangle'); tone(c, t + 0.11, 783.99, 783.99, 0.18, 0.03, 'triangle'); },
+      close: function () { var c = ac(); if (!c) return; var t = c.currentTime + 0.005; sweep(c, t, 2200, 420, 0.16, 0.08); tone(c, t + 0.03, 659.25, 392, 0.14, 0.03, 'triangle'); },
+      step: function (fwd) { var c = ac(); if (!c) return; var t = c.currentTime + 0.005; click(c, t, 0.045); sweep(c, t, fwd ? 900 : 1800, fwd ? 1800 : 900, 0.09, 0.05); },
+      page: function (index) { var c = ac(); if (!c) return; var t = c.currentTime + 0.005; click(c, t, 0.05); tone(c, t, NOTES[index] || 660, NOTES[index] || 660, 0.09, 0.05, 'triangle'); },
+      theme: function (toDark) { var c = ac(); if (!c) return; var t = c.currentTime + 0.005; click(c, t, 0.07);
+        if (toDark) { tone(c, t, 740, 370, 0.16, 0.06); tone(c, t + 0.05, 370, 370, 0.12, 0.03, 'triangle'); }
+        else { tone(c, t, 370, 740, 0.16, 0.06); tone(c, t + 0.05, 1110, 1110, 0.12, 0.025, 'triangle'); } }
+    };
+  })();
+
+  /* ---------- light / dark switch (remembers the choice in this browser) ---------- */
+  (function () {
+    var root = document.documentElement, btns = [].slice.call(document.querySelectorAll('.theme button'));
+    var sys = matchMedia('(prefers-color-scheme: dark)');
+    var stored = null; try { stored = localStorage.getItem('aa-theme'); } catch (e) {}
+    function current() { var t = root.getAttribute('data-theme'); return t === 'dark' || t === 'light' ? t : (sys.matches ? 'dark' : 'light'); }
+    function sync() { var c = current(); btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.t === c ? 'true' : 'false'); }); }
+    if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+    sync();
+    if (sys.addEventListener) sys.addEventListener('change', sync);
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      if (current() === b.dataset.t) return;
+      SFX.theme(b.dataset.t === 'dark');
+      root.classList.add('theming'); root.setAttribute('data-theme', b.dataset.t);
+      try { localStorage.setItem('aa-theme', b.dataset.t); } catch (e) {}
+      sync(); setTimeout(function () { root.classList.remove('theming'); }, 380);
+    }); });
+  })();
+
+  /* ---------- copy email ---------- */
+  [].forEach.call(document.querySelectorAll('[data-copy]'), function (b) {
+    b.addEventListener('click', function () {
+      var span = b.querySelector('span'), orig = span.textContent, done = function (m) { span.textContent = m; setTimeout(function () { span.textContent = orig; }, 1400); };
+      try { navigator.clipboard.writeText(b.dataset.copy).then(function () { done('$ copied'); }, function () { done('$ select to copy'); }); } catch (e) { done('$ select to copy'); }
+    });
+  });
+
+  /* ---------- home pixel field ---------- */
+  (function () {
+    var host = document.getElementById('field'), cv = document.getElementById('field-cv'), ctx = cv.getContext('2d');
+    var stepsHost = document.getElementById('steps');
+    var STEPS = [['01', 'Research', 0, 0, true], ['02', 'Flows', 1, 1, false], ['03', 'System', 2, 0, true], ['04', 'Prototype', 3, 1, false], ['05', 'Build', 4, 0, false]];
+    STEPS.forEach(function (s) { var d = document.createElement('div'); d.className = 'step' + (s[4] ? ' tint' : ''); d.dataset.c = s[2]; d.dataset.r = s[3]; d.innerHTML = '<span class="sq"></span>' + s[1] + ' <b>' + s[0] + '</b>'; stepsHost.appendChild(d); });
+    var W, H, cols, rows, S = 10, seed = [], mx = -1, raf = 0, visible = true, t0 = performance.now();
+    function place() { var phone = innerWidth <= 760, gc = phone ? 3 : 6, cw = W / gc, ch = H / 3;
+      [].forEach.call(stepsHost.children, function (d, i) { var c = +d.dataset.c, r = +d.dataset.r; if (phone) { if (i > 2) { d.style.display = 'none'; return; } c = i; } d.style.display = ''; d.style.left = (c * cw + 1) + 'px'; d.style.top = (r * ch + 1) + 'px'; d.style.width = (cw - 1) + 'px'; d.style.height = (ch - 1) + 'px'; }); }
+    function size() { var r = host.getBoundingClientRect(); W = r.width; H = r.height; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); cols = Math.ceil(W / S); rows = Math.ceil(H / S); seed = []; for (var i = 0; i < cols * rows; i++) seed.push(Math.random()); place(); }
+    function draw(now) {
+      var t = (now - t0) / 1000, orange = '#FB5707', dim = css('--line');
+      ctx.clearRect(0, 0, W, H);
+      for (var x = 0; x < cols; x++) {
+        var u = x / cols, bell = Math.exp(-Math.pow((u - .5) / .26, 2));
+        var h = rows * (.12 + .5 * bell + .08 * Math.sin(x * .45 + t * 1.3) + .05 * Math.sin(x * .13 - t * .7));
+        if (mx >= 0) { var dx = (x * S - mx) / 70; h += rows * .35 * Math.exp(-dx * dx); }
+        for (var y = 0; y < rows; y++) {
+          var fromB = rows - y, p = Math.max(0, 1 - fromB / h); p = p * p * 1.6;
+          var on = seed[y * cols + x] < p;
+          if (on) { ctx.fillStyle = orange; ctx.globalAlpha = 1; ctx.fillRect(x * S + 2, y * S + 2, S - 4, S - 4); }
+          else if (fromB < h * 1.25 && seed[y * cols + x] > .985) { ctx.fillStyle = orange; ctx.globalAlpha = .45; ctx.fillRect(x * S + 3, y * S + 3, S - 6, S - 6); }
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = (!reduce && visible) ? requestAnimationFrame(draw) : 0;
+    }
+    function kick() { if (!raf) raf = requestAnimationFrame(draw); }
+    size(); kick();
+    new ResizeObserver(function () { size(); kick(); }).observe(host);
+    host.addEventListener('pointermove', function (e) { mx = e.clientX - host.getBoundingClientRect().left; kick(); });
+    host.addEventListener('pointerleave', function () { mx = -1; kick(); });
+    var io = new IntersectionObserver(function (es) { visible = es[0].isIntersecting && !document.hidden; if (visible) kick(); }); io.observe(host);
+    document.addEventListener('visibilitychange', function () { visible = !document.hidden; if (visible) kick(); });
+  })();
+
+  /* ---------- bar pill ---------- */
+  var bar = document.getElementById('bar'), pill = document.getElementById('pill');
+  var links = [].slice.call(bar.querySelectorAll('a')), pillPlaced = false;
+  function movePill(a, instant) {
+    var x = a.offsetLeft, w = a.offsetWidth;
+    if (!pillPlaced || instant || !M || reduce) { pill.style.width = w + 'px'; pill.style.transform = 'translateX(' + x + 'px)'; pillPlaced = true; return; }
+    M.animate(pill, { x: x, width: w + 'px' }, SPRING);
+  }
+  addEventListener('resize', function () { var a = bar.querySelector('[aria-current="page"]'); if (a) movePill(a, true); });
+
+  /* ---------- views ---------- */
+  var ORDER = ['home', 'work', 'cv', 'contact'];
+  var views = {}; [].forEach.call(document.querySelectorAll('[data-view]'), function (v) { views[v.id] = v; });
+  var shown = null, token = 0;
+  function enter(v, dir) {
+    v.hidden = false; v.scrollTop = 0;
+    anim(v, { opacity: [0, 1], x: [dir * 28, 0], filter: ['blur(4px)', 'blur(0px)'] }, SOFT);
+    anim(v.querySelectorAll('.s'), { opacity: [0, 1], y: [10, 0] }, { type: 'spring', stiffness: 300, damping: 30, delay: stagger(0.03, { startDelay: 0.05 }) });
+  }
+  function show(id) {
+    if (shown === id) return;
+    links.forEach(function (a) { if (a.getAttribute('href') === '#' + id) { a.setAttribute('aria-current', 'page'); movePill(a); } else a.removeAttribute('aria-current'); });
+    var prev = shown ? views[shown] : null, next = views[id];
+    if (!shown) Object.keys(views).forEach(function (k) { if (k !== id) views[k].hidden = true; });
+    var dir = shown ? (ORDER.indexOf(id) > ORDER.indexOf(shown) ? 1 : -1) : 0;
+    if (shown) SFX.page(ORDER.indexOf(id));
+    shown = id; var t = ++token;
+    if (prev) anim(prev, { opacity: 0, x: -dir * 28, filter: 'blur(4px)' }, { duration: 0.16, ease: [0.4, 0, 1, 1] }).then(function () { if (shown !== prev.id) { prev.hidden = true; prev.style.opacity = ''; prev.style.transform = ''; prev.style.filter = ''; } });
+    enter(next, dir);
+  }
+
+  /* ---------- dialog ---------- */
+  var ov = document.getElementById('ov'), dlg = document.getElementById('dlg'), body = document.getElementById('dbody'), cur = null, isOpen = false, stopViz = null;
+  var phone = function () { return innerWidth <= 680; };
+  function fill(p) {
+    cur = p;
+    document.getElementById('d-meta').textContent = '0' + (p.i + 2) + ' · ' + p.tag + (p.year ? ' · ' + p.year : '');
+    document.getElementById('d-title').textContent = p.name;
+    document.getElementById('d-lede').textContent = p.lede;
+    var vis = document.getElementById('d-visual'); if (stopViz) stopViz(); stopViz = null; vis.innerHTML = '';
+    if (p.public) wfCard(vis); else stopViz = dotMatrix(vis, p.id, p.accent);
+    document.getElementById('d-cap').textContent = p.public ? 'Warm Fusion specimen · real tokens from tokens.css' : 'Abstracted under NDA · layout rendered as a dot matrix, no real screens or data';
+    var dl = document.getElementById('d-case'); dl.innerHTML = '';
+    [['Problem', p.problem], ['Work', p.work], ['Result', p.result]].forEach(function (row) {
+      var div = document.createElement('div'); div.innerHTML = '<dt class="mono">' + row[0] + '</dt><dd></dd>';
+      if (p.public || p.mixed) div.querySelector('dd').innerHTML = row[1]; else div.querySelector('dd').textContent = row[1];
+      dl.appendChild(div);
+    });
+    var prev = P[(p.i + P.length - 1) % P.length], next = P[(p.i + 1) % P.length];
+    var bp = document.getElementById('d-prev'), bn = document.getElementById('d-next');
+    bp.textContent = '← ' + prev.short; bp.dataset.id = prev.id; bn.textContent = next.short + ' →'; bn.dataset.id = next.id;
+    body.scrollTop = 0;
+    anim(dl.children, { opacity: [0, 1], y: [8, 0] }, { type: 'spring', stiffness: 300, damping: 30, delay: stagger(0.05, { startDelay: 0.15 }) });
+  }
+  function openP(p) {
+    var wasOpen = isOpen; fill(p); isOpen = true;
+    if (wasOpen) { SFX.step(true); anim(body, { opacity: [0.3, 1], x: [14, 0] }, SOFT); return; }
+    SFX.open();
+    ov.classList.add('open');
+    anim(ov, { opacity: [0, 1] }, { duration: 0.2 });
+    if (phone()) anim(dlg, { y: ['100%', '0%'] }, SPRING); else anim(dlg, { opacity: [0, 1], y: [24, 0], scale: [0.97, 1] }, SPRING);
+    dlg.focus({ preventScroll: true });
+  }
+  function closeP(fromHash) {
+    if (!isOpen) return; isOpen = false;
+    if (!fromHash) { history.replaceState(null, '', '#work'); SFX.close(); }
+    if (phone()) anim(dlg, { y: '100%' }, { duration: 0.22, ease: [0.4, 0, 1, 1] }); else anim(dlg, { opacity: 0, y: 16, scale: 0.98 }, { duration: 0.18, ease: [0.4, 0, 1, 1] });
+    anim(ov, { opacity: 0 }, { duration: 0.22 }).then(function () { if (!isOpen) { ov.classList.remove('open'); dlg.style.transform = ''; dlg.style.opacity = ''; if (stopViz) { stopViz(); stopViz = null; } } });
+    var b = cur && list.querySelector('[data-id="' + cur.id + '"]'); if (b) b.focus({ preventScroll: true });
+  }
+  document.getElementById('d-close').addEventListener('click', function () { closeP(); });
+  ov.addEventListener('click', function (e) { if (e.target === ov) closeP(); });
+  document.getElementById('d-prev').addEventListener('click', function () { location.hash = this.dataset.id; });
+  document.getElementById('d-next').addEventListener('click', function () { location.hash = this.dataset.id; });
+  document.addEventListener('keydown', function (e) {
+    if (!isOpen) return;
+    if (e.key === 'Escape') closeP();
+    if (e.key === 'ArrowRight') location.hash = document.getElementById('d-next').dataset.id;
+    if (e.key === 'ArrowLeft') location.hash = document.getElementById('d-prev').dataset.id;
+    if (e.key === 'Tab') { var f = dlg.querySelectorAll('button, a[href]'); var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && (document.activeElement === first || document.activeElement === dlg)) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+  });
+  var y0 = null, dy = 0;
+  dlg.addEventListener('pointerdown', function (e) { if (!phone() || (e.target.closest('.dlg-body') && body.scrollTop > 0) || e.target.closest('button, a, .visual')) return; y0 = e.clientY; dy = 0; });
+  addEventListener('pointermove', function (e) { if (y0 === null) return; dy = Math.max(0, e.clientY - y0); dlg.style.transform = 'translateY(' + dy + 'px)'; });
+  function endDrag() { if (y0 === null) return; y0 = null; if (dy > 90) closeP(); else anim(dlg, { y: [dy, 0] }, SPRING); }
+  addEventListener('pointerup', endDrag); addEventListener('pointercancel', endDrag);
+
+  /* ---------- routing (plain #name hashes) ---------- */
+  function route() {
+    var h = location.hash.slice(1);
+    if (byId[h]) { show('work'); openP(byId[h]); return; }
+    closeP(true);
+    show(ORDER.indexOf(h) > -1 ? h : 'home');
+  }
+  addEventListener('hashchange', route);
+  route();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { var a = bar.querySelector('[aria-current="page"]'); if (a) movePill(a, true); });
+})();
+</script>
 </body>
-
 </html>
