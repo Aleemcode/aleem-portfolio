@@ -287,6 +287,9 @@ html.theming, html.theming * { transition: background-color 320ms var(--ease), c
 .case dt { color: var(--faint); }
 .case dd { margin: 0; color: var(--ink); max-width: 40em; }
 .case dd a { color: var(--terra-text); }
+.dec { margin: 0; padding: 0; list-style: none; counter-reset: dec; display: grid; gap: 10px; }
+.dec li { counter-increment: dec; display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 6px; }
+.dec li::before { content: counter(dec, decimal-leading-zero); font: 400 10.5px/1.9 var(--f-mono); letter-spacing: .08em; color: var(--terra-text); }
 
 /* Warm Fusion specimen card (public) */
 .wf { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr auto; background: #121212; color: #F2F0EA; }
@@ -690,13 +693,13 @@ html.theming, html.theming * { transition: background-color 320ms var(--ease), c
   }
 
   var P = [
-    { id: 'komex', name: 'KOMEX, Kenya’s commodity exchange', short: 'KOMEX', year: '2025–26', tag: 'Web and admin', accent: '#B7791F',
+    { id: 'komex', decisions: ["Mapped the whole exchange as one five-stage journey, deposit to settlement, before drawing screens, so every role can see where a lot sits and what happens next.", "Designed two ways to prepare lots, a guided flow and a workspace, because a depositor listing now and then and an operations team handling many lots at once need different paces.", "Put the numbers that decide a bid where the bid happens: buying limit, bid status, payment deadline and fee breakdown, so buyers never bid blind."], name: 'KOMEX, Kenya’s commodity exchange', short: 'KOMEX', year: '2025–26', tag: 'Web and admin', accent: '#B7791F',
       line: 'A full commodity exchange for Kenya, from warehouse deposit to settlement.',
       lede: 'KOMEX is a commodity exchange in Kenya. I designed the exchange end to end for depositors, buyers and the exchange’s operations teams, across the web platform and the admin dashboard. I was the sole designer, working with one product manager.',
       problem: 'An exchange runs on handoffs between warehouses, sellers, buyers and exchange teams. Each of them needs to know whether a lot is ready to trade, how much a buyer can bid, how a trade ended and whether payment is due.',
       work: 'Mapped the full journey across five stages: deposit, lot creation, catalogue, auction and settlement. Explored guided and workspace-based flows for preparing lots, setting reserves and publishing the catalogue. Designed bidding and settlement with clear bid status, buying limits, payment deadlines and fee breakdowns, plus the operations views that run the exchange behind them.',
       result: 'A complete exchange design covering both participant and operations workflows, built for clearer trading and more transparent settlement.' },
-    { id: 'cudie', name: 'Cudie, payments for farmers and beyond', short: 'Cudie', year: '2024–25', tag: 'Mobile, admin and brand', accent: '#7738DD', site: true,
+    { id: 'cudie', decisions: ["Defined consistency as shared rules, not identical layouts. Admin, agent and customer apps share hierarchy, actions, feedback and brand, while each layout fits its user.", "Gave money its own type treatments, one for amounts on mobile and one for figures on dashboards, so balances and totals read the same everywhere.", "Designed every card action with its full set of states: activation, freezing and issuance each have confirmation, processing, success and error."], name: 'Cudie, payments for farmers and beyond', short: 'Cudie', year: '2024–25', tag: 'Mobile, admin and brand', accent: '#7738DD', site: true,
       line: 'A payments product with customer, agent and admin apps, one design system and its own brand.',
       lede: 'Cudie is AFEX’s payments platform, built for farmers and beyond: send and receive money, buy airtime and data, pay bills and use Cudie cards. I led the design of the customer and agent mobile apps and the admin web app, built the Cudie design system, and designed the landing page at cudie.ng. The team was two designers, two product managers, two frontend and two backend engineers.',
       problem: 'Cudie serves three very different users. Admins scan card inventory, fees and revenue. Agents manage stock and issue cards. Customers activate cards, set PINs and redeem rewards. All of it had to feel like one product.',
@@ -708,7 +711,7 @@ html.theming, html.theming * { transition: background-color 320ms var(--ease), c
       problem: 'Company data sat with a few analysts. Anyone else who needed a number had to request it and wait, so data knowledge stayed in one team and everyday decisions were slower than they needed to be.',
       work: 'Designed a conversational explorer where people ask a business question and get a chart back, with no query language. Added self-service reports and dashboards for saving and sharing answers, and alerts that flag when a number changes. Gave analysts dataset configuration, and administrators user and role management to control who sees what. Built a variable-driven design system (319 variables, light and dark, four accent themes) so a feature-rich product stayed consistent as it grew.',
       result: 'Designed to open company data to the whole organisation: business users answer their own questions, analysts spend less time on routine requests, and access stays governed by role.' },
-    { id: 'ecn', name: 'ECN, Africa Exchange admin system', short: 'ECN', year: '2022–23', tag: 'Web admin', accent: '#E5261F',
+    { id: 'ecn', decisions: ["Treated client management, market management, trade operations, reporting and accounting as one system with one navigation, rather than five separate tools.", "Gave the slowest task the biggest change: trade matching and cross-trade resolution moved onto a single page instead of a chain of pages.", "Standardised tables, filters, forms and actions, so a pattern learned on one screen works on every screen. On dense operations screens, predictability beats novelty."], name: 'ECN, Africa Exchange admin system', short: 'ECN', year: '2022–23', tag: 'Web admin', accent: '#E5261F',
       line: 'One admin system for a commodity exchange’s clearance, trading and finance teams.',
       lede: 'A redesign of ECN, the internal admin system that runs Africa Exchange’s high-volume commodity exchange. It’s used by trade clearance, trading operations, admin and finance teams. I was the sole designer and led the redesign across the whole system, working with one product manager.',
       problem: 'Related tasks were spread across many pages. Trade matching and cross-trade resolution were especially slow, which held up clearance and made trading targets harder to hit on time.',
@@ -911,9 +914,12 @@ html.theming, html.theming * { transition: background-color 320ms var(--ease), c
     if (p.public) wfCard(vis); else if (p.site) stopViz = siteCard(vis); else stopViz = dotMatrix(vis, p.id, p.accent);
     document.getElementById('d-cap').textContent = p.public ? 'Warm Fusion specimen · real tokens from tokens.css' : p.site ? 'The live landing page at cudie.ng, desktop and phone · hover to pause' : 'Abstracted under NDA · layout rendered as a dot matrix · real screens on a call';
     var dl = document.getElementById('d-case'); dl.innerHTML = '';
-    [['Problem', p.problem], ['Work', p.work], ['Result', p.result]].forEach(function (row) {
+    [['Problem', p.problem], ['Work', p.work], ['Decisions', p.decisions], ['Result', p.result]].forEach(function (row) {
+      if (!row[1]) return;
       var div = document.createElement('div'); div.innerHTML = '<dt class="mono">' + row[0] + '</dt><dd></dd>';
-      if (p.public || p.mixed) div.querySelector('dd').innerHTML = row[1]; else div.querySelector('dd').textContent = row[1];
+      var dd = div.querySelector('dd');
+      if (Array.isArray(row[1])) { var ol = document.createElement('ol'); ol.className = 'dec'; row[1].forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ol.appendChild(li); }); dd.appendChild(ol); }
+      else if (p.public || p.mixed) dd.innerHTML = row[1]; else dd.textContent = row[1];
       dl.appendChild(div);
     });
     var prev = P[(p.i + P.length - 1) % P.length], next = P[(p.i + 1) % P.length];
